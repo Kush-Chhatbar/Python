@@ -1,0 +1,1 @@
+Day 30 has modifications of handling errors and searching data so all of those are done in the day 29 project itself.
