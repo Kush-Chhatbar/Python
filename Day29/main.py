@@ -5,6 +5,21 @@ import random
 import pyperclip
 import json
 
+# ---------------------------- SEARCH DATA ---------------------------------- #
+def search_data():
+    website = website_input.get()
+
+    try:
+        with open("credentials.json", mode="r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data file found.")
+    else:
+        if website in data:
+            messagebox.showinfo(title=website, message=f"Email: {data[website]["email"]} \n Password: {data[website]["password"]}")
+        else:
+            messagebox.showinfo(title=website, message=f"No details for the {website} exists") 
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
     letters = string.ascii_letters
@@ -75,8 +90,12 @@ password_image = canvas.create_image(100, 100, image=title_image)
 website_label = Label(text="Website: ", bg="white")
 website_label.grid(column=0, row=1)
 
-website_input = Entry(width=35)
-website_input.grid(column=1, row=1, columnspan=2)
+website_input = Entry(width=21)
+website_input.grid(column=1, row=1)
+
+# Search button
+search_button = Button(text="Search", bg="white", command=search_data)
+search_button.grid(column=2, row=1, columnspan=2)
 
 # Email/Username field
 email_label = Label(text="Email/Username: ", bg="white")
